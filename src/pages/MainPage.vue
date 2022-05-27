@@ -46,8 +46,9 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .main-page {
+  padding-top: 40px;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 65px);
   background-color: #01977e;
   &__photos {
     display: flex;
