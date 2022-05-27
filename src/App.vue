@@ -15,7 +15,7 @@ import MainPage from "./pages/MainPage.vue";
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Comic Sans MS;
+  /* font-family: Comic Sans MS; */
 }
 
 .container {

@@ -1,11 +1,13 @@
 <template>
   <main class="main-page">
+    <modal-window v-show="isOpenModal" :closeModal="closeModal" />
     <div class="container">
       <div class="main-page__photos">
         <photo-item
           v-for="photo in photos.data"
           :key="photo.id"
           :imgPath="photo.url"
+          :openModal="openModal"
         />
       </div>
     </div>
@@ -15,7 +17,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import type { Ref } from "vue";
-import PhotoItem from "../components/PhotoItem/PhotoItem.vue";
+import PhotoItem from "@/components/PhotoItem/PhotoItem.vue";
+import ModalWindow from "@/components/ModalWindow/ModalWindow.vue";
+import getPhotos from "@/requests/getPhotos";
 
 type PhotosType = {
   isLoading: boolean;
@@ -32,15 +36,22 @@ const photos: Ref<PhotosType> = ref({
   isLoading: false,
   data: [],
 });
+const isOpenModal: Ref<boolean> = ref(false);
+
+const openModal = () => {
+  isOpenModal.value = true;
+};
+
+const closeModal = () => {
+  isOpenModal.value = false;
+};
 
 onMounted(async () => {
   photos.value.isLoading = true;
-  await fetch("https://boiling-refuge-66454.herokuapp.com/images")
-    .then((data) => data.json())
-    .then((photosArr) => {
-      photos.value.isLoading = false;
-      photos.value.data = photosArr;
-    });
+  getPhotos().then((photosArr) => {
+    photos.value.data = photosArr;
+    photos.value.isLoading = false;
+  });
 });
 </script>
 
