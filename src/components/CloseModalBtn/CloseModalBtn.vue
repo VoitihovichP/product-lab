@@ -24,7 +24,7 @@ const props = defineProps<CloseBtnProps>();
   cursor: pointer;
   &:before {
     content: "+";
-    color: #337ab7;
+    color: #01977e;
     position: absolute;
     z-index: 2;
     transform: rotate(45deg);
@@ -42,7 +42,7 @@ const props = defineProps<CloseBtnProps>();
     width: 100%;
     height: 100%;
     border-radius: 100%;
-    background: #337ab7;
+    background: #01977e;
     z-index: 1;
     transition: all 0.3s cubic-bezier(0.77, 0, 0.2, 0.85);
     transform: scale(0.01);

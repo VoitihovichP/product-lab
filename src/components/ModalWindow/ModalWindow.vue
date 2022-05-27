@@ -2,19 +2,57 @@
   <div class="overlay">
     <div class="modal">
       <close-modal-btn :close-fn="props.closeModal" />
+      <img :src="modalData.content.url" alt="photo" class="modal__img" />
+      <div class="modal__comments">
+        <comment-item
+          v-for="comment in modalData.content.comments"
+          :key="comment.id"
+          :commentText="comment.text"
+          :commentDate="comment.date"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, onMounted, ref } from "vue";
+import type { Ref } from "vue";
 import CloseModalBtn from "../CloseModalBtn/CloseModalBtn.vue";
+import getComments from "../../requests/getComments";
+import { GetCommentsResponse } from "@/types/types";
+import CommentItem from "../CommentItem/CommentItem.vue";
 
 type ModalWindowProps = {
+  imgId: number;
   closeModal: () => void;
 };
 
+type ModalData = {
+  isLoading: boolean;
+  content: GetCommentsResponse;
+};
+
 const props = defineProps<ModalWindowProps>();
+
+const modalData: Ref<ModalData> = ref({
+  isLoading: false,
+  content: {
+    id: 0,
+    url: "",
+    comments: [],
+  },
+});
+
+onMounted(() => {
+  modalData.value.isLoading = true;
+  getComments(props.imgId).then(({ id, comments, url }) => {
+    modalData.value.content.id = id;
+    modalData.value.content.url = url;
+    modalData.value.content.comments = comments;
+    modalData.value.isLoading = false;
+  });
+});
 </script>
 
 <style lang="scss" scoped>
@@ -32,9 +70,22 @@ const props = defineProps<ModalWindowProps>();
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 700px;
+  min-height: 600px;
   background-color: #ffffff;
   border-radius: 10px;
+  &__img {
+    max-width: 600px;
+    max-height: 400px;
+    border-radius: 20px;
+  }
+  &__comments {
+    width: 100%;
+  }
 }
 </style>

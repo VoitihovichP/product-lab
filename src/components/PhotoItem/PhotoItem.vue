@@ -1,7 +1,7 @@
 <template>
   <img
     class="photo-item"
-    @click="props.openModal"
+    @click="handleOpen"
     :src="props.imgPath"
     alt="photo"
   />
@@ -11,11 +11,16 @@
 import { defineProps } from "vue";
 
 type PhotoItemProps = {
+  imgId: number;
   imgPath: string;
-  openModal: () => void;
+  openModal: (id: number) => void;
 };
 
 const props = defineProps<PhotoItemProps>();
+
+const handleOpen = () => {
+  props.openModal(props.imgId);
+};
 </script>
 
 <style lang="scss" scoped>

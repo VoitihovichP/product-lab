@@ -1,11 +1,16 @@
 <template>
   <main class="main-page">
-    <modal-window v-show="isOpenModal" :closeModal="closeModal" />
+    <modal-window
+      v-if="isOpenModal"
+      :imgId="activePhotoId"
+      :closeModal="closeModal"
+    />
     <div class="container">
       <div class="main-page__photos">
         <photo-item
           v-for="photo in photos.data"
           :key="photo.id"
+          :imgId="photo.id"
           :imgPath="photo.url"
           :openModal="openModal"
         />
@@ -37,12 +42,15 @@ const photos: Ref<PhotosType> = ref({
   data: [],
 });
 const isOpenModal: Ref<boolean> = ref(false);
+const activePhotoId: Ref<number> = ref(0);
 
-const openModal = () => {
+const openModal = (id: number) => {
+  activePhotoId.value = id;
   isOpenModal.value = true;
 };
 
 const closeModal = () => {
+  activePhotoId.value = 0;
   isOpenModal.value = false;
 };
 
