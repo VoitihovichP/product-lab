@@ -1,24 +1,20 @@
-# product-lab
+# Look At
 
-## Project setup
-```
-npm install
-```
+Приложение создано в ходе выполнения тестового задания для компании ***Продуктлаб***
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+**Требования**
+*Необходимо сверстать адаптивную страницу со списком фотографий.
+При клике на фотографии открывается модальное окно с фотографией,
+списком комментариев и формой добавления комментариев.*
 
-### Compiles and minifies for production
-```
-npm run build
-```
+//deploy
 
-### Lints and fixes files
-```
-npm run lint
-```
+Для того что бы запустить проект выполните следующие действия:
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+`git clone https://github.com/VoitihovichP/product-lab.git`
+
+`cd product-lab`
+
+`npm install`
+
+`npm run serve`
