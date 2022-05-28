@@ -7,8 +7,7 @@
 <style lang="scss" scoped>
 .loader {
   position: absolute;
-  top: 25%;
-  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
   width: 48px;
   height: 48px;

@@ -35,5 +35,14 @@ const handleOpen = () => {
   &:active {
     transform: scale(0.9);
   }
+  @media (max-width: 1199px) {
+    width: 250px;
+  }
+  @media (max-width: 1023px) {
+    width: 200px;
+  }
+  @media (max-width: 767px) {
+    width: 160px;
+  }
 }
 </style>

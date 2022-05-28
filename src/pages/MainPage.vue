@@ -15,7 +15,7 @@
           :openModal="openModal"
         />
       </div>
-      <pre-loader style="top: 50%" v-else />
+      <pre-loader style="left: 50%" v-else />
     </div>
   </main>
 </template>
@@ -69,8 +69,11 @@ onMounted(async () => {
 .main-page {
   padding-top: 40px;
   width: 100vw;
-  height: calc(100vh - 65px);
+  min-height: calc(100vh - 65px);
   background-color: #01977e;
+  @media (max-width: 767px) {
+    padding-top: 20px;
+  }
   &__photos {
     display: flex;
     flex-wrap: wrap;

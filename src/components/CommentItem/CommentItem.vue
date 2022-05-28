@@ -40,16 +40,28 @@ const convertDate = (): string => {
   border-radius: 10px;
   &__avatar {
     width: 40px;
+    @media (max-width: 1199px) {
+      width: 30px;
+    }
   }
   &__text {
     overflow-wrap: anywhere;
     font-family: Comic Sans MS;
     font-size: 20px;
+    @media (max-width: 1199px) {
+      font-size: 18px;
+    }
+    @media (max-width: 767px) {
+      font-size: 16px;
+    }
   }
   &__date {
     font-family: Comic Sans MS;
     color: #7c7c7c;
     font-size: 16px;
+    @media (max-width: 1199px) {
+      font-size: 14px;
+    }
   }
 }
 </style>

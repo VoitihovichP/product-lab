@@ -2,19 +2,22 @@
   <div class="overlay">
     <div class="modal">
       <close-modal-btn :close-fn="props.closeModal" />
-      <div v-if="!modalData.isLoading" class="modal__wrapper">
-        <img :src="modalData.content.url" alt="photo" class="modal__img" />
-        <div class="modal__comments">
-          <comment-item
-            v-for="comment in modalData.content.comments"
-            :key="comment.id"
-            :commentText="comment.text"
-            :commentDate="comment.date"
-          />
-        </div>
-        <comment-form @onSubmit="handleSubmit" />
+      <img
+        v-show="!modalData.isLoading"
+        :src="modalData.content.url"
+        alt="photo"
+        class="modal__img"
+      />
+      <div v-show="!modalData.isLoading" class="modal__comments">
+        <comment-item
+          v-for="comment in modalData.content.comments"
+          :key="comment.id"
+          :commentText="comment.text"
+          :commentDate="comment.date"
+        />
       </div>
-      <pre-loader v-else />
+      <comment-form v-show="!modalData.isLoading" @onSubmit="handleSubmit" />
+      <pre-loader v-show="modalData.isLoading" />
     </div>
   </div>
 </template>
@@ -82,21 +85,40 @@ onMounted(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
   padding: 50px;
   width: 700px;
-  max-height: calc(100vh - 20px);
+  height: calc(100vh - 20px);
   background-color: #ffffff;
   border-radius: 10px;
-  &__wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  @media (max-width: 1600px) {
+    padding: 30px 20px;
+    width: 600px;
+    gap: 10px;
+  }
+  @media (max-width: 1023px) {
+    width: 450px;
+  }
+  @media (max-width: 575px) {
+    width: 300px;
   }
   &__img {
     max-width: 600px;
     max-height: 400px;
     border-radius: 20px;
+    @media (max-width: 1600px) {
+      max-width: 450px;
+    }
+    @media (max-width: 1199px) {
+      width: 350px;
+    }
+    @media (max-width: 575px) {
+      width: 200px;
+    }
   }
   &__comments {
     display: flex;

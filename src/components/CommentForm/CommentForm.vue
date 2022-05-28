@@ -43,7 +43,15 @@ const onSubmit = () => {
     margin-bottom: 20px;
     border-radius: 15px;
     border: 1px solid #014c40;
+    font-family: Comic Sans MS;
     resize: none;
+    @media (max-width: 1600px) {
+      padding: 10px 20px;
+      font-size: 18px;
+    }
+    @media (max-width: 1199px) {
+      font-size: 14px;
+    }
   }
   &__submit {
     padding: 5px 5px 6px 5px;
