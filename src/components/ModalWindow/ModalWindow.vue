@@ -11,6 +11,7 @@
           :commentDate="comment.date"
         />
       </div>
+      <comment-form @onSubmit="handleSubmit" />
     </div>
   </div>
 </template>
@@ -20,8 +21,10 @@ import { defineProps, onMounted, ref } from "vue";
 import type { Ref } from "vue";
 import CloseModalBtn from "../CloseModalBtn/CloseModalBtn.vue";
 import getComments from "../../requests/getComments";
-import { GetCommentsResponse } from "@/types/types";
+import { CommentItemType, GetCommentsResponse } from "@/types/types";
 import CommentItem from "../CommentItem/CommentItem.vue";
+import CommentForm from "../CommentForm/CommentForm.vue";
+import postComment from "@/requests/postComment";
 
 type ModalWindowProps = {
   imgId: number;
@@ -43,6 +46,11 @@ const modalData: Ref<ModalData> = ref({
     comments: [],
   },
 });
+
+const handleSubmit = (comment: CommentItemType) => {
+  postComment(props.imgId, comment.text);
+  modalData.value.content.comments.push(comment);
+};
 
 onMounted(() => {
   modalData.value.isLoading = true;
@@ -76,7 +84,7 @@ onMounted(() => {
   align-items: center;
   gap: 20px;
   width: 700px;
-  min-height: 600px;
+  max-height: calc(100vh - 20px);
   background-color: #ffffff;
   border-radius: 10px;
   &__img {
@@ -85,7 +93,11 @@ onMounted(() => {
     border-radius: 20px;
   }
   &__comments {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     width: 100%;
+    overflow: auto;
   }
 }
 </style>

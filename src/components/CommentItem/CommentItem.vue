@@ -42,6 +42,7 @@ const convertDate = (): string => {
     width: 40px;
   }
   &__text {
+    overflow-wrap: anywhere;
     font-family: Comic Sans MS;
     font-size: 20px;
   }
