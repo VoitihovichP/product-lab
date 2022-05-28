@@ -98,6 +98,14 @@ onMounted(() => {
     gap: 15px;
     width: 100%;
     overflow: auto;
+    &::-webkit-scrollbar {
+      width: 8px;
+      background: none;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: #31fad8;
+    }
   }
 }
 </style>

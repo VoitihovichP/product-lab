@@ -12,6 +12,7 @@
   height: 65px;
   background-color: #016655;
   &__title {
+    font-family: Comic Sans MS;
     color: #ffffff;
   }
 }

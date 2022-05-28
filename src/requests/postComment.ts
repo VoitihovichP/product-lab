@@ -1,5 +1,3 @@
-import { CommentItemType } from "./../types/types";
-
 const postComment = async (id: number, text: string) => {
   await fetch(
     ` https://boiling-refuge-66454.herokuapp.com/images/${id}/comments`,
