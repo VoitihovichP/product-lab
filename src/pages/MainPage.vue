@@ -6,7 +6,7 @@
       :closeModal="closeModal"
     />
     <div class="container">
-      <div class="main-page__photos">
+      <div v-if="!photos.isLoading" class="main-page__photos">
         <photo-item
           v-for="photo in photos.data"
           :key="photo.id"
@@ -15,6 +15,7 @@
           :openModal="openModal"
         />
       </div>
+      <pre-loader style="top: 50%" v-else />
     </div>
   </main>
 </template>
@@ -25,6 +26,7 @@ import type { Ref } from "vue";
 import PhotoItem from "@/components/PhotoItem/PhotoItem.vue";
 import ModalWindow from "@/components/ModalWindow/ModalWindow.vue";
 import getPhotos from "@/requests/getPhotos";
+import PreLoader from "@/components/PreLoader/PreLoader.vue";
 
 type PhotosType = {
   isLoading: boolean;

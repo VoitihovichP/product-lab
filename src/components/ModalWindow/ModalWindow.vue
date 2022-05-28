@@ -2,16 +2,19 @@
   <div class="overlay">
     <div class="modal">
       <close-modal-btn :close-fn="props.closeModal" />
-      <img :src="modalData.content.url" alt="photo" class="modal__img" />
-      <div class="modal__comments">
-        <comment-item
-          v-for="comment in modalData.content.comments"
-          :key="comment.id"
-          :commentText="comment.text"
-          :commentDate="comment.date"
-        />
+      <div v-if="!modalData.isLoading" class="modal__wrapper">
+        <img :src="modalData.content.url" alt="photo" class="modal__img" />
+        <div class="modal__comments">
+          <comment-item
+            v-for="comment in modalData.content.comments"
+            :key="comment.id"
+            :commentText="comment.text"
+            :commentDate="comment.date"
+          />
+        </div>
+        <comment-form @onSubmit="handleSubmit" />
       </div>
-      <comment-form @onSubmit="handleSubmit" />
+      <pre-loader v-else />
     </div>
   </div>
 </template>
@@ -25,6 +28,7 @@ import { CommentItemType, GetCommentsResponse } from "@/types/types";
 import CommentItem from "../CommentItem/CommentItem.vue";
 import CommentForm from "../CommentForm/CommentForm.vue";
 import postComment from "@/requests/postComment";
+import PreLoader from "../PreLoader/PreLoader.vue";
 
 type ModalWindowProps = {
   imgId: number;
@@ -79,14 +83,16 @@ onMounted(() => {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
   width: 700px;
   max-height: calc(100vh - 20px);
   background-color: #ffffff;
   border-radius: 10px;
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
   &__img {
     max-width: 600px;
     max-height: 400px;
