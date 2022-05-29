@@ -22,7 +22,7 @@ https://pavel-voitekhovich-test.netlify.app/
 
 
 
-**Задача с собеседования:
+**Задача с собеседования:**
 
 *Условие:* 
 
