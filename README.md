@@ -19,3 +19,26 @@ https://pavel-voitekhovich-test.netlify.app/
 `npm install`
 
 `npm run serve`
+
+
+
+**Задача с собеседования:
+
+*Условие: 
+
+Найти повторяющийся элемент в массиве и получить количество его повторений.
+
+*Решение
+
+```
+const arr = [2, 3, 1, 1, 1, 4, 5];
+const obj = {};
+arr.forEach((item) => {
+    obj[item] = obj[item] + 1 || 1;
+});
+
+for (key in obj) {
+  if (obj[key] > 1) {
+    console.log(`элемент ${key} повторяется ${obj[key]} раз`);
+  }
+}
